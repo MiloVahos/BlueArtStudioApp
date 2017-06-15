@@ -1,0 +1,95 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/white"
+    tools:context="com.evilgeniuses.raykgeneer.blueartstudioapp.AddArtistaFragment">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:stretchColumns="1"
+        android:weightSum="1">
+
+        <ImageButton
+            android:layout_width="200sp"
+            android:layout_height="200sp"
+            android:background="@android:color/transparent"
+            android:layout_margin="10sp"
+            android:src="@drawable/add_btn"
+            android:id="@+id/IBFoto"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:id="@+id/ENombre"
+            android:layout_marginBottom="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:padding="10sp"
+            android:background="@drawable/input_outline_dark"
+            android:hint="@string/Nombre"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:id="@+id/EEstilos"
+            android:layout_marginBottom="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:padding="10sp"
+            android:background="@drawable/input_outline_dark"
+            android:hint="@string/Estilos"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="100sp"
+            android:id="@+id/EDescripcion"
+            android:background="@drawable/input_outline_dark"
+            android:gravity="top"
+            android:layout_marginBottom="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:padding="5sp"
+            android:inputType="textMultiLine"
+            android:hint="@string/Descripcion"
+            android:lines="15"
+            android:maxLines="16"
+            android:ems="10"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:id="@+id/EInsta"
+            android:layout_marginBottom="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:padding="10sp"
+            android:background="@drawable/input_outline_dark"
+            android:hint="@string/LinkInsta"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
+            android:id="@+id/EFace"
+            android:layout_marginBottom="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:padding="10sp"
+            android:background="@drawable/input_outline_dark"
+            android:hint="@string/LinkFace"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="center|bottom"
+            android:text="@string/Publicar"
+            android:id="@+id/BPublicar"
+            android:textColor="@color/white"
+            android:textSize="25dp"/>
+
+    </TableLayout>
+</ScrollView>

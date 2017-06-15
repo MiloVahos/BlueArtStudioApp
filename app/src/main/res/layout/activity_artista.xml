@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.evilgeniuses.raykgeneer.blueartstudioapp.ArtistaActivity">
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:stretchColumns="1"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:gravity="end"
+                android:padding="5sp">
+
+                <ImageView
+                    android:layout_width="130sp"
+                    android:layout_height="130sp"
+                    android:id="@+id/IVFoto"
+                    android:layout_marginEnd="20sp">
+                </ImageView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="130sp"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/TNombre"
+                        android:textColor="@color/colorAccent"
+                        android:textStyle="bold"
+                        android:hint="Nombre Artista"
+                        android:textSize="18dp"
+                        android:padding="2sp"
+                        android:layout_marginBottom="10sp"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5sp"
+                        android:id="@+id/TEstilos"
+                        android:textColor="@color/colorAccent"
+                        android:hint="Estilos del artista"
+                        android:textSize="16dp"
+                        android:padding="2sp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/whitesmoke"
+                android:id="@+id/TDescripcion"
+                android:textColor="@color/colorAccent"
+                android:textSize="15sp"
+                android:paddingStart="35sp"
+                android:paddingEnd="35sp"
+                android:paddingTop="10sp"
+                android:paddingBottom="10sp"
+                android:layout_marginBottom="20sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/Trabajos"
+                android:textSize="15sp"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
+                android:padding="5sp"
+                android:layout_marginBottom="5sp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="130sp"
+                android:id="@+id/RVTatuajes"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="2sp"
+                android:text="@string/Encuentra"
+                android:textColor="@color/colorAccent"
+                android:textSize="17sp"
+                android:layout_gravity="center"
+                android:layout_margin="5sp"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:padding="5sp">
+
+                <ImageView
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:src="@drawable/facebook_blue_white_icon"
+                    android:layout_marginEnd="10sp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:id="@+id/BFacebookLink"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:padding="5sp">
+
+                <ImageView
+                    android:layout_width="30sp"
+                    android:layout_height="30sp"
+                    android:src="@drawable/instagram"
+                    android:layout_marginEnd="10sp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:id="@+id/BInstagramLink"
+                    android:textSize="15sp"
+                    android:textColor="@color/colorPrimary"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </TableLayout>
+</ScrollView>

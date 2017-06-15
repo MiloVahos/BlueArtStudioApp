@@ -1,0 +1,58 @@
+<resources>
+
+    <!--APP STRINGS-->
+    <string name="app_name">BlueApp</string>
+    <string name="facebook_app_id">477482432596347</string>
+
+    <!--STRINGS PARA INICIAR SESIÓN ACTIVITY-->
+    <string name="Correo">Correo Electrónico</string>
+    <string name="Password">Contraseña</string>
+    <string name="IniciarSesion">Iniciar Sesión</string>
+    <string name="Registrarse">Registrarse</string>
+    <string name="Facebook">FACEBOOK</string>
+    <string name="EmailValidation">Te hemos enviado un correo de verificación a tu Email, no podrás acceder hasta verifiques que tu cuenta existe.</string>
+
+    <!--STRINGS PARA TOASTS-->
+    <string name="Bienvenida">Bienvenido a Blue Art Studio App</string>
+    <string name="CancelarLogin">Has cancelado el inicio de sesión</string>
+    <string name="CamposVacios">Uno o más campos obligatorios estan vacíos</string>
+    <string name="Problema">Parece que ha ocurrido un problema</string>
+    <string name="MensajeCamposTexto">Debes llenar los campos de texto</string>
+    <string name="PostCargado">Tu publicación se ha cargado con éxito</string>
+    <string name="EmailIsNotVal">La cuenta no existe o no ha sido validada</string>
+    <string name="LogOut">Te esperamos de vuelta en BlueApp</string>
+
+    <!--STRINGS DE MENUS-->
+    <string name="CerrarSesion">Cerrar Sesión</string>
+    <string name="ConfirmCS">Esta a punto de salir de Blue Art Studio App ¿Desea Continuar?</string>
+
+    <!--STRINGS PARA MAIN ACTIVITY-->
+    <string name="MainToolbarName">Blue Art Studio</string>
+
+    <!--STRINGS PARA ADD NOTICIA FRAGMENT-->
+    <string name="Titulo">Título</string>
+    <string name="Descripcion">Descripción</string>
+    <string name="Publicar">PUBLICAR</string>
+
+    <!--STRINGS PARA ADD TIENDA FRAGMENT-->
+    <string name="Producto">Producto</string>
+    <string name="Precio">Precio</string>
+
+    <!--STRINGS PARA ADD TATUADOR FRAGMENT-->
+    <string name="Nombre">Nombre</string>
+    <string name="Estilos">Estilos</string>
+    <string name="LinkInsta">Link Instagram</string>
+    <string name="LinkFace">Link Facebook</string>
+
+    <!--STRINGS PARA ARTISTAS FRAGMENT-->
+    <string name="VerMas">Ver Más</string>
+
+    <!--STRINGS PARA TIENDA FRAGMENT-->
+    <string name="Reservar">Reservar</string>
+
+    <!--STRINGS PARA ACTIVITY ARTISTA-->
+    <string name="Trabajos">ALGUNOS TRABAJOS</string>
+    <string name="Encuentra">ENCUENTRA MÁS EN:</string>
+
+
+</resources>

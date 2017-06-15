@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.evilgeniuses.raykgeneer.blueartstudioapp.AddActivity">
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/AddTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="80sp"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/white"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorHeight="10sp"
+        android:elevation="4sp"
+        android:background="@drawable/degradado" />
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:id="@+id/AddViewPager"/>
+
+</LinearLayout>

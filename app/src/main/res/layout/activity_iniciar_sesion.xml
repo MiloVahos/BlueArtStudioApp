@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/colorAccent"
+    android:background="@color/colorAccent"
+    tools:context="com.evilgeniuses.raykgeneer.blueartstudioapp.IniciarSesionActivity">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/SlidesViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="#00ffffff"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40sp"
+            android:background="@drawable/input_outline_white"
+            android:inputType="textEmailAddress"
+            android:hint="@string/Correo"
+            android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:padding="10sp"
+            android:id="@+id/ECorreo"
+            android:layout_marginStart="25sp"
+            android:layout_marginEnd="25sp"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:passwordToggleEnabled="true"
+            android:textColorHint="@color/white"
+            app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout"
+            app:passwordToggleTint="@color/white"
+            android:id="@+id/TILPassword">
+
+            <android.support.design.widget.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:background="@drawable/input_outline_white"
+                android:id="@+id/EPass"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:inputType="textPassword"
+                android:hint="@string/Password"
+                android:padding="10sp"
+                android:layout_marginStart="25sp"
+                android:layout_marginEnd="25sp"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_margin="10sp">
+
+            <Button
+                android:layout_width="140sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/BIniciarSesion"
+                android:layout_marginEnd="7sp"
+                android:background="@drawable/input_outline_white"
+                android:text="@string/IniciarSesion"
+                android:textColor="@color/white"
+                android:padding="5sp"/>
+
+            <Button
+                android:layout_width="140sp"
+                android:layout_height="wrap_content"
+                android:id="@+id/BRegistrarse"
+                android:layout_marginStart="7sp"
+                android:background="@drawable/input_outline_white"
+                android:text="@string/Registrarse"
+                android:textColor="@color/white"
+                android:padding="5sp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/com_facebook_blue"
+            android:drawableStart="@drawable/facebook_blue_white_icon"
+            android:layout_margin="10sp"
+            android:text="@string/Facebook"
+            android:textSize="25dp"
+            android:padding="5sp"
+            android:textColor="@color/white"
+            android:id="@+id/BFacebookLogin"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="20sp"
+                android:layout_height="50sp"
+                android:layout_gravity="start"
+                android:src="@drawable/ic_keyboard_arrow_left_white_24dp" />
+
+            <ImageView
+                android:layout_width="20sp"
+                android:layout_height="50sp"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_keyboard_arrow_right_white_24dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+</RelativeLayout>

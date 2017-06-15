@@ -1,0 +1,62 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.evilgeniuses.raykgeneer.blueartstudioapp.AddNoticiaFragment">
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@android:color/transparent"
+        android:layout_margin="10sp"
+        android:src="@drawable/add_btn"
+        android:id="@+id/IBNoticia"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40sp"
+        android:id="@+id/ETitulo"
+        android:layout_marginBottom="10sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:padding="5sp"
+        android:background="@drawable/input_outline_dark"
+        android:hint="@string/Titulo"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="100sp"
+        android:id="@+id/EDescripcion"
+        android:background="@drawable/input_outline_dark"
+        android:gravity="top"
+        android:layout_marginBottom="10sp"
+        android:layout_marginStart="10sp"
+        android:layout_marginEnd="10sp"
+        android:padding="5sp"
+        android:inputType="textMultiLine"
+        android:hint="@string/Descripcion"
+        android:lines="15"
+        android:maxLines="16"
+        android:ems="10"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center|bottom"
+        android:orientation="vertical" >
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="60sp"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="center|bottom"
+            android:text="@string/Publicar"
+            android:id="@+id/BPublicar"
+            android:textColor="@color/white"
+            android:textSize="25dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
