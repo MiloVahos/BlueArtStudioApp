@@ -5,14 +5,6 @@
     android:orientation="vertical"
     tools:context="com.evilgeniuses.raykgeneer.blueartstudioapp.AddNoticiaFragment">
 
-    <ImageButton
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@android:color/transparent"
-        android:layout_margin="10sp"
-        android:src="@drawable/add_btn"
-        android:id="@+id/IBNoticia"/>
-
     <EditText
         android:layout_width="match_parent"
         android:layout_height="40sp"
@@ -20,6 +12,7 @@
         android:layout_marginBottom="10sp"
         android:layout_marginStart="10sp"
         android:layout_marginEnd="10sp"
+        android:layout_marginTop="10sp"
         android:padding="5sp"
         android:background="@drawable/input_outline_dark"
         android:hint="@string/Titulo"/>
@@ -39,6 +32,14 @@
         android:lines="15"
         android:maxLines="16"
         android:ems="10"/>
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@android:color/transparent"
+        android:layout_margin="10sp"
+        android:src="@drawable/add_btn"
+        android:id="@+id/IBNoticia"/>
 
     <LinearLayout
         android:layout_width="match_parent"

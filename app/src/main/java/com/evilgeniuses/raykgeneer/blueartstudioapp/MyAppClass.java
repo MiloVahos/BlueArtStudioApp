@@ -2,7 +2,6 @@
  * @Developer: Juan Camilo Peña Vahos
  * @Description: Application class
  * @Date: 17/05/2017
- * TODO:
  */
 
 package com.evilgeniuses.raykgeneer.blueartstudioapp;

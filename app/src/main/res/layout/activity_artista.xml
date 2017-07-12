@@ -26,12 +26,13 @@
                 android:gravity="end"
                 android:padding="5sp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/IVFoto"
                     android:layout_width="130sp"
                     android:layout_height="130sp"
-                    android:id="@+id/IVFoto"
-                    android:layout_marginEnd="20sp">
-                </ImageView>
+                    android:layout_marginEnd="20sp"
+                    app:civ_border_width="2dp"
+                    app:civ_border_color="#FF000000"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"

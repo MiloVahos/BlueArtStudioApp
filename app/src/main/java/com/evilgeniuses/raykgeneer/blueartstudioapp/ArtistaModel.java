@@ -10,6 +10,7 @@ package com.evilgeniuses.raykgeneer.blueartstudioapp;
 public class ArtistaModel {
 
     private String nombre;
+    private String apodo;
     private String estilos;
     private String descripcion;
     private String imageURL;
@@ -19,9 +20,10 @@ public class ArtistaModel {
 
     public ArtistaModel(){}
 
-    public ArtistaModel(String nombre, String estilos, String descripcion, String imageURL,
+    public ArtistaModel(String nombre, String apodo, String estilos, String descripcion, String imageURL,
                         String linkInsta, String linkFace, String faceCode){
         this.nombre = nombre;
+        this.apodo = apodo;
         this.estilos = estilos;
         this.descripcion = descripcion;
         this.imageURL = imageURL;
@@ -31,6 +33,7 @@ public class ArtistaModel {
     }
 
     public String getNombre() {return nombre;}
+    public String getApodo() {return apodo;}
     public String getEstilos() {return estilos;}
     public String getDescripcion() {return descripcion;}
     public String getImageURL() {return imageURL;}

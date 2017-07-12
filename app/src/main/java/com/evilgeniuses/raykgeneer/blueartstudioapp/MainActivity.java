@@ -2,16 +2,19 @@
  * @Developer: Juan Camilo Peña Vahos
  * @Description: Main Activity
  * @Date: 17/05/2017
- * TODO: SOLUCIONAR PANTALLA BLANCA AL INICIO DE LA APP
  * TODO: TIEMPO DE CARGA DEL BOTÓN FLOTANTE CUANDO INICIA EL ADMINISTRADOR
+ * TODO: EL SISTEMA DE RIFAS SI ES SOLICITADO
+ * TODO: ELIMINAR LAS THIRD PARTIES DE CALIGRAPHY Y CIRCLE IMAGE VIEW
  */
 
 package com.evilgeniuses.raykgeneer.blueartstudioapp;
 
 //Declaración de librerías
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -34,6 +37,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -59,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
             R.drawable.ic_skull_white_36dp,
             R.drawable.ic_hanger_white_36dp};
 
-    //Constantes
-
     //Rutas
     private static final String Admin = "Admin";
 
@@ -73,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //>>>>>>>>>>>>>>>>>>>>>>>>>>CARGAR FIREBASE Y ACTIVAR MODO OFFLINE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         FirebaseUtils.getDatabase();
+        FirebaseMessaging.getInstance().subscribeToTopic("NoticiasNotify");
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>INICIALIZACIÓN DE COMPONENTE<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
         mAuth = FirebaseAuth.getInstance();
@@ -137,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.cerrar_sesion) {
+        if(id == R.id.cerrar_sesion){
             //Esta opción del menú es el LogOut de la aplicación, se crear un dialogo de confirmación.
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setMessage(R.string.ConfirmCS)
@@ -155,6 +158,26 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             builder.show();
+        }else if(id ==  R.id.instagram){
+            Uri uri = Uri.parse("https://www.instagram.com/blueartstudio");
+            Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+            likeIng.setPackage("com.instagram.android");
+            try {
+                startActivity(likeIng);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("http://instagram.com/xxx")));
+            }
+        }else if(id == R.id.facebook){
+            Uri uri = Uri.parse("fb://page/191531284250444");
+            Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
+            likeIng.setPackage("com.facebook.katana");
+            try {
+                startActivity(likeIng);
+            } catch (ActivityNotFoundException e) {
+                startActivity(new Intent(Intent.ACTION_VIEW,
+                        Uri.parse("https://www.facebook.com/blueartstudiotattoo/")));
+            }
         }
         return super.onOptionsItemSelected(item);
     }

@@ -54,7 +54,9 @@ public class AddNoticiaFragment extends Fragment {
     //Rutas a la base de datos
     private static final String Config = "Config";
     private static final String ContNews = "ContNews";
+    private static final String ContValor = "ContValor";
     private static final String Noticias = "Noticias"; //Tambien es la ruta al storage
+    private static final String Noticia = "Noticia";
 
     //Constantes
     private static final int GALLERY_REQUEST = 1;
@@ -65,7 +67,8 @@ public class AddNoticiaFragment extends Fragment {
     private String Fecha;
     private String UniqueID;
     private Uri ImageURI = null;
-    private int Contador;
+    private int ContNew;
+    private int ContVal;
 
 
     @Override
@@ -120,18 +123,18 @@ public class AddNoticiaFragment extends Fragment {
         if(!TextUtils.isEmpty(Titulo) && !TextUtils.isEmpty(Descripcion) &&  (ImageURI != null)){
             mProgress.setMessage("Posting on App...");
             mProgress.show(); //Muestra el Progress Dialog
-
             StorageReference filepath =  mStorage.child(Noticias).child(UniqueID);
             filepath.putFile(ImageURI).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {//Se carga al storage
                     Uri downloadUri = taskSnapshot.getDownloadUrl();
                     //Se publica en la base de datos
-                    NoticiaModel noticiaModel = new NoticiaModel(Titulo,Descripcion, downloadUri.toString(), Fecha, Contador);
-                    mRef.child(Noticias).child(UniqueID).setValue(noticiaModel);
-                    //Se actualiza el contador
-                    if (Contador == 1){Contador = 20;}else {Contador--;}
-                    mRef.child(Config).child(ContNews).setValue(Contador);
+                    NoticiaModel noticiaModel = new NoticiaModel(Titulo,Descripcion,downloadUri.toString(),Fecha,ContVal);
+                    mRef.child(Noticias).child(Noticia+Integer.toString(ContNew)).setValue(noticiaModel);//Se carga la novedad
+                    if(ContNew == 20){ContNew = 1;}else{ContNew++;}
+                    ContVal--;
+                    mRef.child(Config).child(ContNews).setValue(ContNew);//Se actualiza el contador
+                    mRef.child(Config).child(ContValor).setValue(ContVal);
                     mProgress.dismiss();
                     Toast.makeText(getApplicationContext(),R.string.PostCargado,Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(getApplicationContext(), MainActivity.class);
@@ -139,18 +142,22 @@ public class AddNoticiaFragment extends Fragment {
                     startActivity(i);//la posibilidad de volver atrás
                 }
             });
-        }else if(!TextUtils.isEmpty(Titulo) && !TextUtils.isEmpty(Descripcion) &&  (ImageURI == null)){
+        /*}else if(!TextUtils.isEmpty(Titulo) && !TextUtils.isEmpty(Descripcion) &&  (ImageURI == null)){
             mProgress.setMessage("Posting on App...");
-            mProgress.show(); //Muestra el Progress Dialog
+            mProgress.show();
             //En este caso no hay imagen
-            NoticiaModel noticiaModel = new NoticiaModel(Titulo,Descripcion, null, Fecha, Contador);
-            if (Contador == 1){Contador = 20;}else {Contador--;}//Se actualiza el contador
-            mRef.child(Noticias).child(UniqueID).setValue(noticiaModel);
+            NoticiaModel noticiaModel = new NoticiaModel(Titulo,Descripcion, null, Fecha, ContVal);
+            mRef.child(Noticias).child(Noticia+Integer.toString(ContNew)).setValue(noticiaModel);//Se carga la novedad
+            if(ContNew == 20){ContNew = 1;}else{ContNew++;}
+            ContVal--;
+            mRef.child(Config).child(ContNews).setValue(ContNew);//Se actualiza el contador
+            mRef.child(Config).child(ContValor).setValue(ContVal);
+
             mProgress.dismiss();
             Toast.makeText(getApplicationContext(),R.string.PostCargado,Toast.LENGTH_SHORT).show();
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);//Se carga nuevamente la interfaz principal sin
-            startActivity(i);//la posibilidad de volver atrás
+            startActivity(i);//la posibilidad de volver atrás*/
         }else{
             mProgress.dismiss();
             Toast.makeText(getApplicationContext(),R.string.MensajeCamposTexto,Toast.LENGTH_SHORT).show();
@@ -162,7 +169,15 @@ public class AddNoticiaFragment extends Fragment {
         mRef.child(Config).child(ContNews).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Contador = dataSnapshot.getValue(Integer.class);
+                ContNew = dataSnapshot.getValue(Integer.class);
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        });
+        mRef.child(Config).child(ContValor).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ContVal = dataSnapshot.getValue(Integer.class);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {}
@@ -178,5 +193,5 @@ public class AddNoticiaFragment extends Fragment {
             IBNoticia.setImageURI(ImageURI);
         }
     }
-    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }

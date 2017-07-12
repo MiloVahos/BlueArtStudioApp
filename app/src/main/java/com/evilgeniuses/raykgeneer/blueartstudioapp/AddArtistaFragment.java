@@ -29,8 +29,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.UUID;
-
 import static com.facebook.FacebookSdk.getApplicationContext;
 
 public class AddArtistaFragment extends Fragment {
@@ -38,6 +36,7 @@ public class AddArtistaFragment extends Fragment {
     //Declaración de componentes
     private ImageButton IBFoto;
     private EditText ENombre;
+    private EditText EApodo;
     private EditText EEstilos;
     private EditText EDescripción;
     private EditText ELinkInsta;
@@ -57,6 +56,7 @@ public class AddArtistaFragment extends Fragment {
 
     //Variables
     private String Nombre;
+    private String Apodo;
     private String Estilos;
     private String Descripcion;
     private String LinkInsta;
@@ -76,6 +76,7 @@ public class AddArtistaFragment extends Fragment {
         mStorage = FirebaseStorage.getInstance().getReference();
         IBFoto = (ImageButton) view.findViewById(R.id.IBFoto);
         ENombre = (EditText) view.findViewById(R.id.ENombre);
+        EApodo = (EditText) view.findViewById(R.id.EApodo);
         EEstilos = (EditText) view.findViewById(R.id.EEstilos);
         EDescripción = (EditText) view.findViewById(R.id.EDescripcion);
         ELinkInsta = (EditText) view.findViewById(R.id.EInsta);
@@ -108,13 +109,15 @@ public class AddArtistaFragment extends Fragment {
     private void startPosting() {
         //SE OBTIENEN LOS DATOS
         Nombre = ENombre.getText().toString().trim();
+        Apodo = EApodo.getText().toString().trim();
         Estilos = EEstilos.getText().toString().trim();
         Descripcion = EDescripción.getText().toString().trim();
         LinkInsta = ELinkInsta.getText().toString().trim();
         LinkFace = ELinkFace.getText().toString().trim();
         CodeFace = "corregir";
-        if (!TextUtils.isEmpty(Nombre) && !TextUtils.isEmpty(Estilos) && !TextUtils.isEmpty(Descripcion)
-                && !TextUtils.isEmpty(LinkFace) && !TextUtils.isEmpty(LinkInsta) && (ImageURI != null)) {
+        if (!TextUtils.isEmpty(Nombre) && !TextUtils.isEmpty(Apodo) && !TextUtils.isEmpty(Estilos) &&
+                !TextUtils.isEmpty(Descripcion) && !TextUtils.isEmpty(LinkFace) && !TextUtils.isEmpty(LinkInsta)
+                && (ImageURI != null)) {
 
             mProgress.setMessage("Posting on App...");
             mProgress.show(); //Muestra el Progress Dialog
@@ -124,7 +127,7 @@ public class AddArtistaFragment extends Fragment {
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {//Se carga al storage
                     Uri downloadUri = taskSnapshot.getDownloadUrl();
                     //Se publica en la base de datos
-                    ArtistaModel artistaModel = new ArtistaModel(Nombre,Estilos,Descripcion,downloadUri.toString(),LinkInsta,LinkFace,CodeFace);
+                    ArtistaModel artistaModel = new ArtistaModel(Nombre,Apodo,Estilos,Descripcion,downloadUri.toString(),LinkInsta,LinkFace,CodeFace);
                     mRef.child(Artistas).child(Nombre).setValue(artistaModel);
                     mProgress.dismiss();
                     Toast.makeText(getApplicationContext(), R.string.PostCargado, Toast.LENGTH_SHORT).show();

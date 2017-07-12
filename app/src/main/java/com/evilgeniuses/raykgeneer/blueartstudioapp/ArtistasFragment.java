@@ -87,7 +87,6 @@ public class ArtistasFragment extends Fragment {
                         });
                     }
                 });
-
             }
         };
         RVArtistas.setAdapter(mAdapter);

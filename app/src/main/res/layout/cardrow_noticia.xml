@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="@color/white"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5sp">
 
@@ -11,11 +12,29 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <ImageView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="200sp"
-            android:id="@+id/IVFoto"
-            android:layout_margin="10sp"/>
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:maxHeight="300sp"
+                android:id="@+id/IVFoto"
+                android:layout_marginBottom="2sp"/>
+            
+            <ImageView
+                android:layout_width="100sp"
+                android:layout_height="100sp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_blue_logo_blue"
+                android:visibility="gone"
+                android:id="@+id/IVLoading"/>
+
+        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,38 +43,89 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="40sp"
-                android:layout_marginLeft="5sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2.5"
                 android:id="@+id/TTitulo"
-                android:layout_marginRight="5sp"
-                android:layout_marginBottom="4sp"
+                android:layout_margin="5sp"
+                android:padding="2sp"
                 android:textColor="@color/colorPrimaryDark"
                 android:textStyle="bold"
                 android:textSize="20dp"
-                android:hint="Text title Goes Here"
-                android:paddingStart="10sp"
-                android:paddingEnd="5sp"
-                android:paddingTop="5sp"
-                android:paddingBottom="2sp"
                 android:maxLength="20"
                 android:ellipsize="marquee"/>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="40sp"
-                android:layout_marginLeft="5sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:id="@+id/TFecha"
-                android:layout_marginRight="5sp"
-                android:layout_marginBottom="4sp"
+                android:layout_margin="5sp"
+                android:padding="2sp"
                 android:textColor="@color/colorAccent"
-                android:textSize="15dp"
-                android:hint="AAAA/MM/DD"
-                android:paddingStart="10sp"
-                android:paddingEnd="5sp"
-                android:paddingTop="5sp"
-                android:paddingBottom="2sp" />
+                android:textSize="17dp" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@color/colorAccent"
+            android:layout_marginStart="20sp"
+            android:layout_marginEnd="20sp"
+            android:visibility="gone"
+            android:id="@+id/VSpace"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/TDescripcion"
+            android:layout_margin="5sp"
+            android:padding="2sp"
+            android:textColor="@color/colorAccent"
+            android:textSize="15dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="20sp"
+            android:layout_marginEnd="20sp"
+            android:layout_marginTop="4sp"
+            android:layout_marginBottom="2sp"
+            android:visibility="gone"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@color/colorPrimary"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/whitesmoke">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/BVerMas"
+                android:background="@color/white"
+                android:layout_marginEnd="1sp"
+                android:text="@string/VerMas"
+                android:drawableStart="@drawable/ic_more_black_24dp"
+                android:padding="5sp"/>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/BCompartir"
+                android:background="@color/white"
+                android:layout_marginStart="1sp"
+                android:text="@string/Compartir"
+                android:drawableStart="@drawable/ic_share_black_24dp"
+                android:padding="5sp"/>
+
+        </LinearLayout>
 
 
     </LinearLayout>

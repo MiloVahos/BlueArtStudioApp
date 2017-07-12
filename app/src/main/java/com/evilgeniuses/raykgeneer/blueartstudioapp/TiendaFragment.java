@@ -7,19 +7,22 @@
 package com.evilgeniuses.raykgeneer.blueartstudioapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class TiendaFragment extends Fragment {
@@ -43,17 +46,37 @@ public class TiendaFragment extends Fragment {
 
         //Instanciación de componentes
         RVTienda = (RecyclerView) view.findViewById(R.id.RVTienda);
-        RVTienda.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        RVTienda.setHasFixedSize(true);
+        RVTienda.setLayoutManager(new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL));
+
         mRef = FirebaseDatabase.getInstance().getReference().child(Tienda);
         mRef.keepSynced(true);//Para mantener los datos cuando offline
 
         mAdapter = new FirebaseRecyclerAdapter<TiendaModel, TiendaFragment.TiendaHolder>
                 (TiendaModel.class, R.layout.cardrow_tienda, TiendaFragment.TiendaHolder.class, mRef) {
             @Override
-            protected void populateViewHolder(TiendaFragment.TiendaHolder viewHolder, TiendaModel model, int position) {
-                viewHolder.setProducto(model.getProducto());
-                viewHolder.setPrecio(model.getPrecio());
+            protected void populateViewHolder(TiendaFragment.TiendaHolder viewHolder, TiendaModel model, final int position) {
                 viewHolder.setImage(getContext(),model.getImageURL());
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final DatabaseReference databaseReference = mAdapter.getRef(position);
+                        final Intent i = new Intent(getContext(), ExpandImageActivity.class);
+                        databaseReference.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                TiendaModel model = dataSnapshot.getValue(TiendaModel.class);
+                                i.putExtra("IMAGE", model.getImageURL());
+                                i.putExtra("PRODUCTO", model.getProducto());
+                                i.putExtra("PRECIO", model.getPrecio());
+                                i.putExtra("TYPE", "Tienda");
+                                startActivity(i);
+                            }
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {}
+                        });
+                    }
+                });
             }
         };
         RVTienda.setAdapter(mAdapter);
@@ -70,16 +93,6 @@ public class TiendaFragment extends Fragment {
         public TiendaHolder(View itemView) {
             super(itemView);
             mView = itemView;
-        }
-
-        public void setProducto(String producto) {
-            TextView TProducto = (TextView) mView.findViewById(R.id.TProducto);
-            TProducto.setText(producto);
-        }
-
-        public void setPrecio(String precio){
-            TextView TPrecio = (TextView) mView.findViewById(R.id.TPrecio);
-            TPrecio.setText(precio);
         }
 
         public void setImage (Context ctx, String image){

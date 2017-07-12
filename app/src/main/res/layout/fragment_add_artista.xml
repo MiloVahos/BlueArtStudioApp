@@ -35,6 +35,17 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50sp"
+            android:id="@+id/EApodo"
+            android:layout_marginBottom="10sp"
+            android:layout_marginStart="10sp"
+            android:layout_marginEnd="10sp"
+            android:padding="10sp"
+            android:background="@drawable/input_outline_dark"
+            android:hint="@string/Apodo"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50sp"
             android:id="@+id/EEstilos"
             android:layout_marginBottom="10sp"
             android:layout_marginStart="10sp"

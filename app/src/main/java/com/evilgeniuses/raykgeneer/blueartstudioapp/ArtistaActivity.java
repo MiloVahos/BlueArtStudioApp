@@ -22,12 +22,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ArtistaActivity extends AppCompatActivity {
 
     //DECLARACIÓN DE COMPONENTES
-    private ImageView IVFoto;
+    private CircleImageView IVFoto;
     private TextView TNombre;
     private TextView TEstilos;
     private TextView TDescripcion;
@@ -56,7 +57,7 @@ public class ArtistaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_artista);
 
         //INSTANCIACIÓN DE COMPONENTES
-        IVFoto = (ImageView) findViewById(R.id.IVFoto);
+        IVFoto = (CircleImageView) findViewById(R.id.IVFoto);
         TNombre = (TextView) findViewById(R.id.TNombre);
         TEstilos = (TextView) findViewById(R.id.TEstilos);
         TDescripcion = (TextView) findViewById(R.id.TDescripcion);
@@ -80,6 +81,7 @@ public class ArtistaActivity extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 ArtistaModel artistaModel = dataSnapshot.getValue(ArtistaModel.class);
                 String Nombre = artistaModel.getNombre();
+                String Apodo = artistaModel.getApodo();
                 String Estilos = artistaModel.getEstilos();
                 String Descripcion = artistaModel.getDescripcion();
                 String FotoURL = artistaModel.getImageURL();
@@ -89,7 +91,7 @@ public class ArtistaActivity extends AppCompatActivity {
                 BFacebookLink.setText(Nombre);
                 BInstagramLink.setText("@"+InstagramLink);
 
-                TNombre.setText(Nombre);
+                TNombre.setText(Nombre+" ("+Apodo+")");
                 TEstilos.setText(Estilos);
                 TDescripcion.setText(Descripcion);
                 Picasso.with(ArtistaActivity.this).load(FotoURL).fit().into(IVFoto);
@@ -108,24 +110,24 @@ public class ArtistaActivity extends AppCompatActivity {
             @Override
             protected void populateViewHolder(final TatuajesHolder viewHolder, Model model, final int position) {
                 viewHolder.setImage(getApplicationContext(),model.getLink());
-
-                /*viewHolder.mView.setOnClickListener(new View.OnClickListener() {
+                viewHolder.mView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         final DatabaseReference databaseReference = mAdapter.getRef(position);
-                        final Intent i = new Intent(TatuadorProfileActivity.this, ViewArtistDesignActivity.class);
+                        final Intent i = new Intent(ArtistaActivity.this, ExpandImageActivity.class);
                         databaseReference.child("Link").addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 String ImageLink = (String) dataSnapshot.getValue();
-                                i.putExtra("LINK", ImageLink);
+                                i.putExtra("IMAGE", ImageLink);
+                                i.putExtra("TYPE", "Design");
                                 startActivity(i);
                             }
                             @Override
                             public void onCancelled(DatabaseError databaseError) {}
                         });
                     }
-                });*/
+                });
             }
         };
         RVTatuajes.setAdapter(mAdapter);
@@ -200,48 +202,4 @@ public class ArtistaActivity extends AppCompatActivity {
     protected void attachBaseContext(Context newBase){
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
-
-    /*
-        Intent facebookIntent = getOpenFacebookIntent(getContext());
-                startActivity(facebookIntent);
-     */
-
-    /*public static Intent getOpenFacebookIntent(Context context) {
-
-        try {
-            context.getPackageManager()
-                    .getPackageInfo("com.facebook.katana", 0); //Checks if FB is even installed.
-            return new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("fb://profile/191531284250444")); //Trys to make intent with FB's URI
-        } catch (Exception e) {
-            return new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://www.facebook.com/blueartstudiotattoo")); //catches and opens a url to the desired page
-        }
-    }*/
-
-     /*BLink.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri uri = Uri.parse("http://instagram.com/_u/camilo.vahos");
-                Intent likeIng = new Intent(Intent.ACTION_VIEW, uri);
-
-                likeIng.setPackage("com.instagram.android");
-
-                try {
-                    startActivity(likeIng);
-                } catch (ActivityNotFoundException e) {
-                    startActivity(new Intent(Intent.ACTION_VIEW,
-                            Uri.parse("http://instagram.com/xxx")));
-                }
-            }
-        });
-
-        BFace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent facebookIntent = getOpenFacebookIntent(getContext());
-                startActivity(facebookIntent);
-            }
-        });*/
-
 }

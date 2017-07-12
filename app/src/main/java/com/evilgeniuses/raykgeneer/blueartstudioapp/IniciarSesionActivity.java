@@ -2,7 +2,7 @@
  * @Developer: Juan Camilo Peña Vahos
  * @Description: Actividad de registro o loggeo a la aplicación
  * @Date: 17/05/2017
- * TODO:
+ * TODO: Dar la opción de modificar las imagenes de incio de sesión
  */
 
 package com.evilgeniuses.raykgeneer.blueartstudioapp;
@@ -26,6 +26,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -54,6 +55,7 @@ public class IniciarSesionActivity extends AppCompatActivity {
     private Button BRegistrarse;
     private EditText ECorreo;
     private EditText EPassword;
+    private ProgressBar PBLoading;
 
     //Viewpager para el manejo de las imagenes de fondo
     private ViewPager viewPager;
@@ -85,7 +87,8 @@ public class IniciarSesionActivity extends AppCompatActivity {
         EPassword = (EditText) findViewById(R.id.EPass);
         BIniciarSesion = (Button) findViewById(R.id.BIniciarSesion);
         BRegistrarse = (Button) findViewById(R.id.BRegistrarse);
-        getWindow().setBackgroundDrawableResource(R.color.colorAccent);//Cuando la imagen no llena el espacio de arriba
+        PBLoading = (ProgressBar) findViewById(R.id.PBLoading);
+        getWindow().setBackgroundDrawableResource(R.color.colorAccent);
 
         //****************************INICIO DE SESIÓN CON FACEBOOK**********************************//
         //Cuando se presiona el botón de facebook, el dispará el este método que
@@ -122,6 +125,7 @@ public class IniciarSesionActivity extends AppCompatActivity {
                 //Obtener los datos
                 Pass = EPassword.getText().toString().trim();
                 Email = ECorreo.getText().toString().trim();
+                PBLoading.setVisibility(View.VISIBLE);
                 if (TextUtils.isEmpty(Pass) || TextUtils.isEmpty(Email)){
                     Toast.makeText(getApplicationContext(),R.string.CamposVacios,Toast.LENGTH_SHORT).show();
                 }else{
@@ -129,7 +133,6 @@ public class IniciarSesionActivity extends AppCompatActivity {
                 }
             }
         });
-
         //Botón de inició de sesión.
         BIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +140,7 @@ public class IniciarSesionActivity extends AppCompatActivity {
                 //Obtener los datos
                 Pass = EPassword.getText().toString().trim();
                 Email = ECorreo.getText().toString().trim();
+                PBLoading.setVisibility(View.VISIBLE);
                 if (TextUtils.isEmpty(Pass) || TextUtils.isEmpty(Email)){
                     Toast.makeText(getApplicationContext(),R.string.CamposVacios,Toast.LENGTH_SHORT).show();
                 }else{
@@ -145,15 +149,13 @@ public class IniciarSesionActivity extends AppCompatActivity {
             }
         });
         //***************FIN DEL INICIO DE SESIÓN CON CORREO******************************************
-
         //CONFIGURACIÓN DE LA PARTE VISUAL
         viewPager = (ViewPager) findViewById(R.id.SlidesViewPager);
         changeStatusBarColor(); //Notification bar is now transparent
         myViewPagerAdapter = new MyViewPagerAdapter();//Se crea un objeto de la clase MyViewPager Adapter
         viewPager.setAdapter(myViewPagerAdapter);//Se pasa el objeto al adapter
     }
-
-    //*****************************MÉTODOS RELACIONADOS CON EL INICIO DE SESIÓN CON EMAIL********************//
+    //*****************************MÉTODOS RELACIONADOS CON EL INICIO DE SESIÓN CON EMAIL***************************//
     private void IniciarSesion(){
         mAuthEmail.signInWithEmailAndPassword(Email, Pass)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -162,6 +164,7 @@ public class IniciarSesionActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             FirebaseUser user = mAuthEmail.getCurrentUser();
                             if(user.isEmailVerified()){
+                                PBLoading.setVisibility(View.GONE);
                                 Toast.makeText(IniciarSesionActivity.this, R.string.Bienvenida, Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(IniciarSesionActivity.this, MainActivity.class);
                                 i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -185,6 +188,7 @@ public class IniciarSesionActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuthEmail.getCurrentUser();
                             user.sendEmailVerification();
+                            PBLoading.setVisibility(View.GONE);
                             AlertDialog.Builder builder = new AlertDialog.Builder(IniciarSesionActivity.this);
                             builder.setMessage(R.string.EmailValidation)
                                     .setPositiveButton("ACEPTAR", new DialogInterface.OnClickListener() {
@@ -197,9 +201,8 @@ public class IniciarSesionActivity extends AppCompatActivity {
                     }
                 });
     }
-    //***********************************************************************************************************
-
-    //*****************************MÉTODOS RELACIONADOS CON EL INICIO DE SESIÓN CON FACEBOOK********************//
+    //*************************************************************************************************************//
+    //*****************************MÉTODOS RELACIONADOS CON EL INICIO DE SESIÓN CON FACEBOOK***********************//
     //Este método intercambia la credencial de Facebook por una de Firebase, de este modo se pasa a hacer
     //el login directamente con firebase y no con facebook
     private void handleFacebookAccessToken(AccessToken token) {
@@ -210,7 +213,7 @@ public class IniciarSesionActivity extends AppCompatActivity {
                 if (!task.isSuccessful()) {
                     Toast.makeText(IniciarSesionActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(getApplicationContext(),R.string.Bienvenida,Toast.LENGTH_LONG).show();//Mensaje de Bienvenida
+                    Toast.makeText(getApplicationContext(),R.string.Bienvenida,Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(IniciarSesionActivity.this, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
@@ -219,9 +222,7 @@ public class IniciarSesionActivity extends AppCompatActivity {
         });
     }
     //*************************************************************************************************************//
-    //************ HACE PARTE DE LA CONFIGURACIÓN VISUAL **************************//
-    @Override
-    public void onBackPressed() {}//No se puede retroceder
+    //**********************************HACE PARTE DE LA CONFIGURACIÓN VISUAL *************************************//
     private void changeStatusBarColor() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = getWindow();
@@ -257,25 +258,18 @@ public class IniciarSesionActivity extends AppCompatActivity {
             container.removeView(view);
         }
     }
-    //***********************************************************************************//
-    //********************OVERRIDE METHODS***********************************************//
+    //*************************************************************************************************************//
+    //*********************************************OVERRIDE METHODS************************************************//
+    @Override
+    public void onBackPressed() {}//No se puede retroceder
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
     @Override
-    public void onStart() {
-        super.onStart();
-    }
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-    //**********************************************************************************//
-
-    @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
+    //************************************************************************************************************//
 }

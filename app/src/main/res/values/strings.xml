@@ -24,6 +24,9 @@
 
     <!--STRINGS DE MENUS-->
     <string name="CerrarSesion">Cerrar Sesión</string>
+    <string name="FacebookPage">Facebook</string>
+    <string name="InstaPage">Instagram</string>
+    <string name="Premios">Premios</string>
     <string name="ConfirmCS">Esta a punto de salir de Blue Art Studio App ¿Desea Continuar?</string>
 
     <!--STRINGS PARA MAIN ACTIVITY-->
@@ -33,6 +36,8 @@
     <string name="Titulo">Título</string>
     <string name="Descripcion">Descripción</string>
     <string name="Publicar">PUBLICAR</string>
+    <string name="Compartir">Compartir</string>
+    <string name="VerMenos">Ver Menos</string>
 
     <!--STRINGS PARA ADD TIENDA FRAGMENT-->
     <string name="Producto">Producto</string>
@@ -40,6 +45,7 @@
 
     <!--STRINGS PARA ADD TATUADOR FRAGMENT-->
     <string name="Nombre">Nombre</string>
+    <string name="Apodo">Apodo</string>
     <string name="Estilos">Estilos</string>
     <string name="LinkInsta">Link Instagram</string>
     <string name="LinkFace">Link Facebook</string>
